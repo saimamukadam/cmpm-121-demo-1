@@ -11,7 +11,7 @@ app.append(header);
 
 // MY CODE HERE
 
-// game premise: pet cat by pressing button 
+// game premise: pet cat by pressing button
 // emoji to display: petting hand 🫳, cat 🐈, fish cake 🍥, yarn 🧶
 
 // Step 1: A button you can click
