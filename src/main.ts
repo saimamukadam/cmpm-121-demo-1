@@ -36,6 +36,6 @@ button.addEventListener("click", () => {
 // implement using setInterval global function
 // set interval 1 click per 1 second
 setInterval(() => {
-    counter++; // incrementing counter
-    counterDisplay.innerHTML = `${counter} pets!`; // updating display
+  counter++; // incrementing counter
+  counterDisplay.innerHTML = `${counter} pets!`; // updating display
 }, 1000); // 1000 milliseconds = 1 second
