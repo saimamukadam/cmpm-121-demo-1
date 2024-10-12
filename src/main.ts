@@ -28,6 +28,6 @@ counterDisplay.innerHTML = `${counter} pets!`;
 app.append(counterDisplay);
 
 button.addEventListener("click", () => {
-    counter++; // incrementing counter each time u click
-    counterDisplay.innerHTML = `${counter} pets!`; // update the display
+  counter++; // incrementing counter each time u click
+  counterDisplay.innerHTML = `${counter} pets!`; // update the display
 });
