@@ -31,3 +31,11 @@ button.addEventListener("click", () => {
   counter++; // incrementing counter each time u click
   counterDisplay.innerHTML = `${counter} pets!`; // update the display
 });
+
+// Step 3: Automatic Clicking
+// implement using setInterval global function
+// set interval 1 click per 1 second
+setInterval(() => {
+    counter++; // incrementing counter
+    counterDisplay.innerHTML = `${counter} pets!`; // updating display
+}, 1000); // 1000 milliseconds = 1 second
