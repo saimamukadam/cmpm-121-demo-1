@@ -27,9 +27,14 @@ const counterDisplay = document.createElement("p"); // create paragraph to displ
 counterDisplay.innerHTML = `${counter} pets!`;
 app.append(counterDisplay);
 
+// ADDITION FOR STEP 5
+let growthRate: number = 0; // initializing growth rate
+
 button.addEventListener("click", () => {
   counter++; // incrementing counter each time u click
   counterDisplay.innerHTML = `${counter} pets!`; // update the display
+  // ADDITION FOR STEP 5
+  checkUpgradeButton(); // check if upgrade button should be enabled
 });
 
 // Step 3: Automatic Clicking
@@ -49,7 +54,7 @@ setInterval(() => {
 // need to use requestAnimationFrame(step) to get current time of program
 // if(timestamp - lastUpdatedTime == 1000) {increment} // if the diff btwn current time is 1000ms
 let lastTimestamp: number | null = null;
-const incrementPerSecond = 1; // total increment wanted per sec
+const incrementPerSecond = growthRate; // total increment wanted per sec // changed 1 to growthRate
 
 function updateCounter(timestamp: number) {
   if (lastTimestamp == null) {
@@ -67,3 +72,29 @@ function updateCounter(timestamp: number) {
 
 // start the animation loop
 requestAnimationFrame(updateCounter);
+
+
+// Step 5: Purchasing an Upgrade
+// upgrade button setup
+const upgradeButton = document.createElement("button");
+upgradeButton.innerHTML = `Purchase Upgrade treat 🍥 - Cost: 10 pets`;
+upgradeButton.disabled = true; // start disabled
+app.append(upgradeButton);
+
+// check if the upgrade button should be enabled
+function checkUpgradeButton() {
+    upgradeButton.disabled = counter < 10; // enable if counter is at least 10
+}
+
+// purchase upgrade functionality
+upgradeButton.addEventListener("click", () => {
+    if (counter >= 10) {
+        counter -= 10; // deduct cost
+        growthRate++; // increase growth rate 
+        counterDisplay.innerHTML = `${Math.floor(counter)} pets`; // update display
+        checkUpgradeButton(); // check if the button should be re-enabled
+    }
+});
+
+// call check function initially to set button state correctly
+checkUpgradeButton();
