@@ -73,7 +73,6 @@ function updateCounter(timestamp: number) {
 // start the animation loop
 requestAnimationFrame(updateCounter);
 
-
 // Step 5: Purchasing an Upgrade
 // upgrade button setup
 const upgradeButton = document.createElement("button");
@@ -83,17 +82,17 @@ app.append(upgradeButton);
 
 // check if the upgrade button should be enabled
 function checkUpgradeButton() {
-    upgradeButton.disabled = counter < 10; // enable if counter is at least 10
+  upgradeButton.disabled = counter < 10; // enable if counter is at least 10
 }
 
 // purchase upgrade functionality
 upgradeButton.addEventListener("click", () => {
-    if (counter >= 10) {
-        counter -= 10; // deduct cost
-        growthRate++; // increase growth rate 
-        counterDisplay.innerHTML = `${Math.floor(counter)} pets`; // update display
-        checkUpgradeButton(); // check if the button should be re-enabled
-    }
+  if (counter >= 10) {
+    counter -= 10; // deduct cost
+    growthRate++; // increase growth rate
+    counterDisplay.innerHTML = `${Math.floor(counter)} pets`; // update display
+    checkUpgradeButton(); // check if the button should be re-enabled
+  }
 });
 
 // call check function initially to set button state correctly
