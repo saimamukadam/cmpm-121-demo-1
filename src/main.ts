@@ -35,7 +35,35 @@ button.addEventListener("click", () => {
 // Step 3: Automatic Clicking
 // implement using setInterval global function
 // set interval 1 click per 1 second
+/*
 setInterval(() => {
   counter++; // incrementing counter
   counterDisplay.innerHTML = `${counter} pets!`; // updating display
 }, 1000); // 1000 milliseconds = 1 second
+*/
+
+// Step 4: Continuous Growth
+// use requestAnimationFrame & remove setTimeout implementation
+    // get current time of program
+    // every 1000 ms, counter ++
+    // need to use requestAnimationFrame(step) to get current time of program
+    // if(timestamp - lastUpdatedTime == 1000) {increment} // if the diff btwn current time is 1000ms
+let lastTimestamp: number | null = null;
+const incrementPerSecond = 1; // total increment wanted per sec
+
+function updateCounter(timestamp: number) {
+    if (lastTimestamp == null) {
+        lastTimestamp = timestamp;
+    }
+
+    const deltaTime = (timestamp - lastTimestamp) / 1000; // time in seconds
+    const increment = deltaTime * incrementPerSecond; // calculate increment based on elapsed time
+
+    counter += increment; // increase counter by calculated increment
+    counterDisplay.innerHTML = `${Math.floor(counter)} pets!`; // update display
+    lastTimestamp = timestamp; // update lastTimestamp for the next frame
+    requestAnimationFrame(updateCounter); // request the next animation frame
+}
+
+// start the animation loop
+requestAnimationFrame(updateCounter);
