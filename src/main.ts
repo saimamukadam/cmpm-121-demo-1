@@ -32,15 +32,15 @@ let growthRate: number = 0; // initializing growth rate
 
 // ADDITION FOR STEP 9 REFACTORING
 interface Item {
-    name: string;
-    cost: number;
-    rate: number;
+  name: string;
+  cost: number;
+  rate: number;
 }
 
 const availableItems: Item[] = [
-    { name: "fish cake 🍥", cost: 10, rate: 0.1 },
-    { name: "milk 🍼", cost: 100, rate: 2},
-    { name: "yarn 🧶", cost: 1000, rate: 50 },
+  { name: "fish cake 🍥", cost: 10, rate: 0.1 },
+  { name: "milk 🍼", cost: 100, rate: 2 },
+  { name: "yarn 🧶", cost: 1000, rate: 50 },
 ];
 
 // ADDITION FOR STEP 6
@@ -111,7 +111,7 @@ requestAnimationFrame(updateCounter);
 // ];
 
 // making buttons and updates for each upgrade
-availableItems.forEach(item => {
+availableItems.forEach((item) => {
   const upgradeButton = document.createElement("button");
   upgradeButton.innerHTML = `${item.name} (+${item.rate.toFixed(1)} pets/sec) - Cost: ${item.cost.toFixed(2)}`;
   app.append(upgradeButton);
