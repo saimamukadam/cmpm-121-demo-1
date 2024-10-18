@@ -39,11 +39,16 @@ interface Item {
 }
 
 const availableItems: Item[] = [
-  { name: "fish cake 🍥", cost: 10, rate: 0.1, description: "a yummy treat"},
-  { name: "milk 🍼", cost: 100, rate: 2, description: "a tasty drink"},
-  { name: "yarn 🧶", cost: 500, rate: 10, description: "so fun to play with"},
-  { name: "meat 🥩", cost: 1000, rate: 50, description: "a hearty meal"},
-  { name: "basket 🧺", cost: 5000, rate: 250, description: "a warm basket to sleep in"},
+  { name: "fish cake 🍥", cost: 10, rate: 0.1, description: "a yummy treat" },
+  { name: "milk 🍼", cost: 100, rate: 2, description: "a tasty drink" },
+  { name: "yarn 🧶", cost: 500, rate: 10, description: "so fun to play with" },
+  { name: "meat 🥩", cost: 1000, rate: 50, description: "a hearty meal" },
+  {
+    name: "basket 🧺",
+    cost: 5000,
+    rate: 250,
+    description: "a warm basket to sleep in",
+  },
 ];
 
 // ADDITION FOR STEP 6
