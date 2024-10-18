@@ -32,11 +32,11 @@ let growthRate: number = 0; // initializing growth rate
 
 // ADDITION FOR STEP 6
 const upgradeCounts: { [key: string]: number } = {
-    "🍥": 0,
-    "🍼": 0,
-    "🧶": 0,
+  "🍥": 0,
+  "🍼": 0,
+  "🧶": 0,
 };
-    // displays
+// displays
 const growthRateDisplay = document.createElement("p");
 growthRateDisplay.innerHTML = `Current growth rate: ${growthRate.toFixed(1)} pets/sec`;
 app.append(growthRateDisplay);
@@ -89,45 +89,41 @@ function updateCounter(timestamp: number) {
 // start the animation loop
 requestAnimationFrame(updateCounter);
 
-
 // ADDITION FOR STEP 6:
-    // upgrade purchasing
+// upgrade purchasing
 const upgrades = [
-    {name: "🍥", cost: 10, growth: 0.1},
-    {name: "🍼", cost: 100, growth: 2.0},
-    {name: "🧶", cost: 1000, growth: 50.0},
+  { name: "🍥", cost: 10, growth: 0.1 },
+  { name: "🍼", cost: 100, growth: 2.0 },
+  { name: "🧶", cost: 1000, growth: 50.0 },
 ];
 
-    // making buttons and updates for each upgrade
+// making buttons and updates for each upgrade
 upgrades.forEach((upgrade) => {
-    const upgradeButton = document.createElement("button");
-    upgradeButton.innerHTML = `Purchase Upgrade ${upgrade.name} (+${upgrade.growth} pets/sec) - Cost: ${upgrade.cost}`;
-    app.append(upgradeButton);
+  const upgradeButton = document.createElement("button");
+  upgradeButton.innerHTML = `Purchase Upgrade ${upgrade.name} (+${upgrade.growth} pets/sec) - Cost: ${upgrade.cost}`;
+  app.append(upgradeButton);
 
-    upgradeButton.addEventListener("click", () => {
-        if(counter >= upgrade.cost) {
-            counter -= upgrade.cost; // deduct cost
-            growthRate += upgrade.growth; // increase growth rate
-            upgradeCounts[upgrade.name as keyof typeof upgradeCounts]++; // increment upgrade count
+  upgradeButton.addEventListener("click", () => {
+    if (counter >= upgrade.cost) {
+      counter -= upgrade.cost; // deduct cost
+      growthRate += upgrade.growth; // increase growth rate
+      upgradeCounts[upgrade.name as keyof typeof upgradeCounts]++; // increment upgrade count
 
-            // update displays
-            counterDisplay.innerHTML = `${Math.floor(counter)} pets!`;
-            growthRateDisplay.innerHTML = `Current growth rate: ${growthRate.toFixed(1)} pets/sec`;
-            upgradeDisplay.innerHTML = `Upgrades: 🍥 ${upgradeCounts["🍥"]}, 🍼 ${upgradeCounts["🍼"]}, 🧶 ${upgradeCounts["🧶"]}`;
-        }
-    });
+      // update displays
+      counterDisplay.innerHTML = `${Math.floor(counter)} pets!`;
+      growthRateDisplay.innerHTML = `Current growth rate: ${growthRate.toFixed(1)} pets/sec`;
+      upgradeDisplay.innerHTML = `Upgrades: 🍥 ${upgradeCounts["🍥"]}, 🍼 ${upgradeCounts["🍼"]}, 🧶 ${upgradeCounts["🧶"]}`;
+    }
+  });
 });
 
 // check upgrade func availability
-function checkUpgradeButton(){
-
-}
+function checkUpgradeButton() {}
 
 checkUpgradeButton();
 
 // init status update for upgrades
 // upgradeDisplay.innerHTML = `Upgrades: A: ${upgradeCounts.A}, B: ${upgradeCounts.B}, C: ${upgradeCounts.C}`;
-
 
 // Step 5: Purchasing an Upgrade
 // upgrade button setup
