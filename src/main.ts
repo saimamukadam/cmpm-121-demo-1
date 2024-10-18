@@ -154,4 +154,4 @@ checkUpgradeButton();
 // call check function initially to set button state correctly
 // checkUpgradeButton();
 
-// Step 8: cleaned up button naming 
+// Step 8: cleaned up button naming
