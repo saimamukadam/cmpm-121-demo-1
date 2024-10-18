@@ -12,7 +12,7 @@ app.append(header);
 // MY CODE HERE
 
 // game premise: pet cat by pressing button
-// emoji to display: petting hand 🫳, cat 🐈, fish cake 🍥, yarn 🧶
+// emoji to display: petting hand 🫳, cat 🐈, fish cake 🍥, milk, 🍼, yarn 🧶
 
 // Step 1: A button you can click
 const pettingButton = "🫳";
@@ -29,6 +29,22 @@ app.append(counterDisplay);
 
 // ADDITION FOR STEP 5
 let growthRate: number = 0; // initializing growth rate
+
+// ADDITION FOR STEP 6
+const upgradeCounts: { [key: string]: number } = {
+    "🍥": 0,
+    "🍼": 0,
+    "🧶": 0,
+};
+    // displays
+const growthRateDisplay = document.createElement("p");
+growthRateDisplay.innerHTML = `Current growth rate: ${growthRate.toFixed(1)} pets/sec`;
+app.append(growthRateDisplay);
+
+const upgradeDisplay = document.createElement("p");
+upgradeDisplay.innerHTML = `Upgrades: 🍥 ${upgradeCounts["🍥"]}, 🍼 ${upgradeCounts["🍼"]}, 🧶 ${upgradeCounts["🧶"]}`;
+app.append(upgradeDisplay);
+// ~addition end~
 
 button.addEventListener("click", () => {
   counter++; // incrementing counter each time u click
@@ -54,7 +70,7 @@ setInterval(() => {
 // need to use requestAnimationFrame(step) to get current time of program
 // if(timestamp - lastUpdatedTime == 1000) {increment} // if the diff btwn current time is 1000ms
 let lastTimestamp: number | null = null;
-const incrementPerSecond = growthRate; // total increment wanted per sec // changed 1 to growthRate
+// const incrementPerSecond = growthRate; // total increment wanted per sec // changed 1 to growthRate
 
 function updateCounter(timestamp: number) {
   if (lastTimestamp == null) {
@@ -62,7 +78,7 @@ function updateCounter(timestamp: number) {
   }
 
   const deltaTime = (timestamp - lastTimestamp) / 1000; // time in seconds
-  const increment = deltaTime * incrementPerSecond; // calculate increment based on elapsed time
+  const increment = deltaTime * growthRate; // calculate increment based on elapsed time
 
   counter += increment; // increase counter by calculated increment
   counterDisplay.innerHTML = `${Math.floor(counter)} pets!`; // update display
@@ -73,27 +89,67 @@ function updateCounter(timestamp: number) {
 // start the animation loop
 requestAnimationFrame(updateCounter);
 
-// Step 5: Purchasing an Upgrade
-// upgrade button setup
-const upgradeButton = document.createElement("button");
-upgradeButton.innerHTML = `Purchase Upgrade treat 🍥 - Cost: 10 pets`;
-upgradeButton.disabled = true; // start disabled
-app.append(upgradeButton);
 
-// check if the upgrade button should be enabled
-function checkUpgradeButton() {
-  upgradeButton.disabled = counter < 10; // enable if counter is at least 10
-}
+// ADDITION FOR STEP 6:
+    // upgrade purchasing
+const upgrades = [
+    {name: "🍥", cost: 10, growth: 0.1},
+    {name: "🍼", cost: 100, growth: 2.0},
+    {name: "🧶", cost: 1000, growth: 50.0},
+];
 
-// purchase upgrade functionality
-upgradeButton.addEventListener("click", () => {
-  if (counter >= 10) {
-    counter -= 10; // deduct cost
-    growthRate++; // increase growth rate
-    counterDisplay.innerHTML = `${Math.floor(counter)} pets`; // update display
-    checkUpgradeButton(); // check if the button should be re-enabled
-  }
+    // making buttons and updates for each upgrade
+upgrades.forEach((upgrade) => {
+    const upgradeButton = document.createElement("button");
+    upgradeButton.innerHTML = `Purchase Upgrade ${upgrade.name} (+${upgrade.growth} pets/sec) - Cost: ${upgrade.cost}`;
+    app.append(upgradeButton);
+
+    upgradeButton.addEventListener("click", () => {
+        if(counter >= upgrade.cost) {
+            counter -= upgrade.cost; // deduct cost
+            growthRate += upgrade.growth; // increase growth rate
+            upgradeCounts[upgrade.name as keyof typeof upgradeCounts]++; // increment upgrade count
+
+            // update displays
+            counterDisplay.innerHTML = `${Math.floor(counter)} pets!`;
+            growthRateDisplay.innerHTML = `Current growth rate: ${growthRate.toFixed(1)} pets/sec`;
+            upgradeDisplay.innerHTML = `Upgrades: 🍥 ${upgradeCounts["🍥"]}, 🍼 ${upgradeCounts["🍼"]}, 🧶 ${upgradeCounts["🧶"]}`;
+        }
+    });
 });
 
-// call check function initially to set button state correctly
+// check upgrade func availability
+function checkUpgradeButton(){
+
+}
+
 checkUpgradeButton();
+
+// init status update for upgrades
+// upgradeDisplay.innerHTML = `Upgrades: A: ${upgradeCounts.A}, B: ${upgradeCounts.B}, C: ${upgradeCounts.C}`;
+
+
+// Step 5: Purchasing an Upgrade
+// upgrade button setup
+// const upgradeButton = document.createElement("button");
+// upgradeButton.innerHTML = `Purchase Upgrade treat 🍥 - Cost: 10 pets`;
+// upgradeButton.disabled = true; // start disabled
+// app.append(upgradeButton);
+
+// check if the upgrade button should be enabled
+// function checkUpgradeButton() {
+//   upgradeButton.disabled = counter < 10; // enable if counter is at least 10
+// }
+
+// purchase upgrade functionality
+// upgradeButton.addEventListener("click", () => {
+//   if (counter >= 10) {
+//     counter -= 10; // deduct cost
+//     growthRate++; // increase growth rate
+//     counterDisplay.innerHTML = `${Math.floor(counter)} pets`; // update display
+//     checkUpgradeButton(); // check if the button should be re-enabled
+//   }
+// });
+
+// call check function initially to set button state correctly
+// checkUpgradeButton();
