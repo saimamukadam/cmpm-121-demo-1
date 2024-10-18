@@ -100,19 +100,23 @@ const upgrades = [
 // making buttons and updates for each upgrade
 upgrades.forEach((upgrade) => {
   const upgradeButton = document.createElement("button");
-  upgradeButton.innerHTML = `Purchase Upgrade ${upgrade.name} (+${upgrade.growth} pets/sec) - Cost: ${upgrade.cost}`;
+  upgradeButton.innerHTML = `Purchase Upgrade ${upgrade.name} (+${upgrade.growth} pets/sec) - Cost: ${upgrade.cost.toFixed(2)}`;
   app.append(upgradeButton);
 
   upgradeButton.addEventListener("click", () => {
     if (counter >= upgrade.cost) {
       counter -= upgrade.cost; // deduct cost
+      upgrade.cost *= 1.15; // increase cost
       growthRate += upgrade.growth; // increase growth rate
-      upgradeCounts[upgrade.name as keyof typeof upgradeCounts]++; // increment upgrade count
+      upgradeCounts[upgrade.name]++; // increment upgrade count
 
       // update displays
       counterDisplay.innerHTML = `${Math.floor(counter)} pets!`;
       growthRateDisplay.innerHTML = `Current growth rate: ${growthRate.toFixed(1)} pets/sec`;
       upgradeDisplay.innerHTML = `Upgrades: 🍥 ${upgradeCounts["🍥"]}, 🍼 ${upgradeCounts["🍼"]}, 🧶 ${upgradeCounts["🧶"]}`;
+
+      // update upgrade button displays
+      upgradeButton.innerHTML = `Purchase Upgrade ${upgrade.name} (+${upgrade.growth} pets/sec) - Cost: ${upgrade.cost.toFixed(2)}`;
     }
   });
 });
