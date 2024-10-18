@@ -30,11 +30,24 @@ app.append(counterDisplay);
 // ADDITION FOR STEP 5
 let growthRate: number = 0; // initializing growth rate
 
+// ADDITION FOR STEP 9 REFACTORING
+interface Item {
+    name: string;
+    cost: number;
+    rate: number;
+}
+
+const availableItems: Item[] = [
+    { name: "fish cake 🍥", cost: 10, rate: 0.1 },
+    { name: "milk 🍼", cost: 100, rate: 2},
+    { name: "yarn 🧶", cost: 1000, rate: 50 },
+];
+
 // ADDITION FOR STEP 6
 const upgradeCounts: { [key: string]: number } = {
-  "🍥": 0,
-  "🍼": 0,
-  "🧶": 0,
+  "fish cake 🍥": 0,
+  "milk 🍼": 0,
+  "yarn 🧶": 0,
 };
 // displays
 const growthRateDisplay = document.createElement("p");
@@ -42,9 +55,9 @@ growthRateDisplay.innerHTML = `Current growth rate: ${growthRate.toFixed(1)} pet
 app.append(growthRateDisplay);
 
 const upgradeDisplay = document.createElement("p");
-upgradeDisplay.innerHTML = `Purchase Upgrades: 🍥 ${upgradeCounts["🍥"]}, 🍼 ${upgradeCounts["🍼"]}, 🧶 ${upgradeCounts["🧶"]}`;
+// upgradeDisplay.innerHTML = `Purchase Upgrades: 🍥 ${upgradeCounts["🍥"]}, 🍼 ${upgradeCounts["🍼"]}, 🧶 ${upgradeCounts["🧶"]}`;
+upgradeDisplay.innerHTML = `Upgrades: ${JSON.stringify(upgradeCounts)}`;
 app.append(upgradeDisplay);
-// ~addition end~
 
 button.addEventListener("click", () => {
   counter++; // incrementing counter each time u click
@@ -91,39 +104,40 @@ requestAnimationFrame(updateCounter);
 
 // ADDITION FOR STEP 6:
 // upgrade purchasing
-const upgrades = [
-  { name: "🍥", displayName: "fish cake", cost: 10, growth: 0.1 },
-  { name: "🍼", displayName: "milk", cost: 100, growth: 2.0 },
-  { name: "🧶", displayName: "yarn", cost: 1000, growth: 50.0 },
-];
+// const upgrades = [
+//   { name: "🍥", displayName: "fish cake", cost: 10, growth: 0.1 },
+//   { name: "🍼", displayName: "milk", cost: 100, growth: 2.0 },
+//   { name: "🧶", displayName: "yarn", cost: 1000, growth: 50.0 },
+// ];
 
 // making buttons and updates for each upgrade
-upgrades.forEach((upgrade) => {
+availableItems.forEach(item => {
   const upgradeButton = document.createElement("button");
-  upgradeButton.innerHTML = `${upgrade.displayName} ${upgrade.name} (+${upgrade.growth.toFixed(1)} pets/sec) - Cost: ${upgrade.cost.toFixed(2)}`;
+  upgradeButton.innerHTML = `${item.name} (+${item.rate.toFixed(1)} pets/sec) - Cost: ${item.cost.toFixed(2)}`;
   app.append(upgradeButton);
 
   upgradeButton.addEventListener("click", () => {
-    if (counter >= upgrade.cost) {
-      counter -= upgrade.cost; // deduct cost
-      upgrade.cost *= 1.15; // increase cost // (STEP 7)
-      growthRate += upgrade.growth; // increase growth rate
-      upgradeCounts[upgrade.name]++; // increment upgrade count
+    if (counter >= item.cost) {
+      counter -= item.cost; // deduct cost
+      item.cost *= 1.15; // increase cost // (STEP 7)
+      growthRate += item.rate; // increase growth rate
+      upgradeCounts[item.name]++; // increment upgrade count
 
       // update displays
       counterDisplay.innerHTML = `${Math.floor(counter)} pets!`;
       growthRateDisplay.innerHTML = `Current growth rate: ${growthRate.toFixed(1)} pets/sec`;
-      upgradeDisplay.innerHTML = `Purchase Upgrades: 🍥 ${upgradeCounts["🍥"]}, 🍼 ${upgradeCounts["🍼"]}, 🧶 ${upgradeCounts["🧶"]}`;
+      // upgradeDisplay.innerHTML = `Purchase Upgrades: 🍥 ${upgradeCounts["🍥"]}, 🍼 ${upgradeCounts["🍼"]}, 🧶 ${upgradeCounts["🧶"]}`;
+      upgradeDisplay.innerHTML = `Upgrades: ${JSON.stringify(upgradeCounts)}`;
 
       // update upgrade button displays (STEP 7)
-      upgradeButton.innerHTML = `${upgrade.displayName} ${upgrade.name} (+${upgrade.growth.toFixed(1)} pets/sec) - Cost: ${upgrade.cost.toFixed(2)}`;
+      // upgradeButton.innerHTML = `${upgrade.displayName} ${upgrade.name} (+${upgrade.growth.toFixed(1)} pets/sec) - Cost: ${upgrade.cost.toFixed(2)}`;
+      upgradeButton.innerHTML = `${item.name} (+${item.rate.toFixed(1)} pets/sec) - Cost: ${item.cost.toFixed(2)}`;
     }
   });
 });
 
 // check upgrade func availability
 function checkUpgradeButton() {}
-
 checkUpgradeButton();
 
 // init status update for upgrades
@@ -155,3 +169,5 @@ checkUpgradeButton();
 // checkUpgradeButton();
 
 // Step 8: cleaned up button naming
+
+// Step 9: REFACTORING
