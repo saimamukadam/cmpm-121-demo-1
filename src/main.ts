@@ -7,20 +7,20 @@ import "./style.css";
 
 const app: HTMLDivElement = document.querySelector("#app")!;
 
-const gameName = "Saima's Awesome Cat Petting Game 🐈"; 
+const gameName = "Saima's Awesome Cat Petting Game 🐈";
 document.title = gameName;
 
-const header = document.createElement("h1"); 
+const header = document.createElement("h1");
 header.innerHTML = gameName;
 app.append(header);
 
 const pettingButton = "🫳";
-const button = document.createElement("button"); 
+const button = document.createElement("button");
 button.innerHTML = pettingButton;
 app.append(button);
 
 let petCounts: number = 0;
-const counterDisplay = document.createElement("p"); 
+const counterDisplay = document.createElement("p");
 counterDisplay.innerHTML = `${petCounts} pets!`;
 app.append(counterDisplay);
 
@@ -68,7 +68,7 @@ upgradeDisplay.innerHTML = `Upgrades: ${JSON.stringify(upgradeCounts)}`;
 app.append(upgradeDisplay);
 
 button.addEventListener("click", () => {
-  petCounts++; 
+  petCounts++;
   counterDisplay.innerHTML = `${petCounts} pets!`;
   checkUpgradeButton(); // check if upgrade button should be enabled
 });
@@ -82,9 +82,9 @@ function updateCounter(timestamp: number) {
 
   const deltaTime = (timestamp - lastTimestamp) / 1000;
   const increment = deltaTime * growthRate; // calculate increment based on elapsed time
-  petCounts += increment; 
-  counterDisplay.innerHTML = `${Math.floor(petCounts)} pets!`; 
-  lastTimestamp = timestamp; 
+  petCounts += increment;
+  counterDisplay.innerHTML = `${Math.floor(petCounts)} pets!`;
+  lastTimestamp = timestamp;
   requestAnimationFrame(updateCounter); // request the next animation frame
 }
 
