@@ -1,5 +1,5 @@
 :root {
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  font-family: 'Courier New', Courier, monospace; /* font idea from https://github.com/rozy-dixon/cmpm-121-demo-1/blob/main/src/style.css */
   line-height: 1.5;
   font-weight: 400;
 
@@ -65,7 +65,7 @@ button:focus-visible {
 @media (prefers-color-scheme: light) {
   :root {
     color: #213547;
-    background-color: #ffffff;
+    background-color: #ffe4f7; /* changed bg color ex from: https://github.com/6YuQing6/cat-fishing-cmpm121-demo1/blob/main/src/style.css */
   }
   a:hover {
     color: #747bff;
